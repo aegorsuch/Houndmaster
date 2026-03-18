@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.atakmap.android.helloworld.plugin"
-    android:versionCode="1773859564"
-    android:versionName="1.0 (b295cc6d) - [5.6.0]" >
+    android:versionCode="1773865863"
+    android:versionName="1.0 (dcc16664) - [5.6.0]" >
 
     <uses-sdk
         android:minSdkVersion="21"

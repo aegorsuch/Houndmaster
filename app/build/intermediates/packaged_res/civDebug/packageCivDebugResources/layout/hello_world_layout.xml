@@ -6,7 +6,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:fadeScrollbars="false">
@@ -45,6 +46,12 @@
                 android:background="@android:color/white">
 
             </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/dashboardContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#222" />
 
             <TextView
                 android:id="@+id/longPressTextView"
@@ -846,5 +853,11 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/dashboardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#222" />
 
 </LinearLayout>

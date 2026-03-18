@@ -17,6 +17,9 @@ import com.atakmap.android.maps.MapView;
 import com.atakmap.android.util.time.TimeListener;
 import com.atakmap.android.util.time.TimeViewUpdater;
 import com.atakmap.coremap.maps.time.CoordinatedTime;
+import com.atakmap.android.helloworld.plugin.BloodhoundOrder;
+import com.atakmap.android.helloworld.plugin.BloodhoundOrderManager;
+import com.atakmap.android.helloworld.plugin.BloodhoundDashboardDropDown;
 
 /**
  * A drop-down menu that demonstrates use of a RecyclerView to show a list of content
@@ -32,6 +35,7 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
     private final RecyclerView _rView;
     private final RecyclerViewAdapter _adapter;
     private final View _vBtn, _hBtn, _gBtn;
+    private static final BloodhoundOrderManager orderManager = BloodhoundOrderManager.getInstance();
 
     public RecyclerViewDropDown(MapView mapView, Context plugin) {
         super(mapView);
@@ -68,8 +72,11 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
                 contactsDropDown.setOnContactSelectedListener(new ContactsRecyclerViewDropDown.OnContactSelectedListener() {
                     @Override
                     public void onContactSelected(MapItem mapItem, MapItem contact) {
-                        // TODO: Implement logic to send mapItem to contact
+                        // Send mapItem to contact and add order
                         sendMapItemToContact(mapItem, contact);
+                        // Show the dashboard after adding the order
+                        BloodhoundDashboardDropDown dash = new BloodhoundDashboardDropDown(_mapView, _plugin, BloodhoundOrderManager.getInstance());
+                        dash.show();
                     }
                 });
                 contactsDropDown.show();
@@ -148,6 +155,12 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
                 THIRD_HEIGHT);
     }
 
+    // Add this method to open the dashboard
+    public static void showDashboard(MapView mapView, Context plugin) {
+        BloodhoundDashboardDropDown dash = new BloodhoundDashboardDropDown(mapView, plugin, BloodhoundOrderManager.getInstance());
+        dash.show();
+    }
+
     // Add this method to handle sending the Map Item to the Contact
     private void sendMapItemToContact(MapItem mapItem, MapItem contact) {
         // Serialize the MapItem to a CoT event
@@ -159,5 +172,9 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
         // Broadcast the CoT event to all
         com.atakmap.android.cot.CotMapComponent.getExternalDispatcher().dispatchToBroadcast(cotEvent);
         android.widget.Toast.makeText(_plugin, "Sent " + mapItem.getTitle(), android.widget.Toast.LENGTH_SHORT).show();
+        // Add to Bloodhound order dashboard
+        String contactName = contact.getMetaString("callsign", contact.getTitle());
+        BloodhoundOrder order = new BloodhoundOrder(mapItem.getTitle(), contactName, BloodhoundOrder.Status.Sent);
+        BloodhoundOrderManager.getInstance().addOrder(order);
     }
 }

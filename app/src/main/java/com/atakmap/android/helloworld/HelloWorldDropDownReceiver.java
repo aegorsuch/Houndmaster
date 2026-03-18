@@ -501,7 +501,7 @@ public class HelloWorldDropDownReceiver extends DropDownReceiver implements
 
         // Initialize Bloodhound dashboard and embed it in the dashboardContainer
         dashboardDropDown = new com.atakmap.android.helloworld.plugin.BloodhoundDashboardDropDown(
-            mapView, pluginContext, new com.atakmap.android.helloworld.plugin.BloodhoundOrderManager());
+            mapView, pluginContext, com.atakmap.android.helloworld.plugin.BloodhoundOrderManager.getInstance());
         FrameLayout dashboardContainer = helloView.findViewById(R.id.dashboardContainer);
         dashboardContainer.removeAllViews();
         dashboardContainer.addView(dashboardDropDown.getView());

@@ -84,6 +84,7 @@ drawable rv_vertical
 drawable svg_example
 id addAnAircraft
 id addBloodhoundOrderBtn
+id addBloodhoundOrderButton
 id addCountToIcon
 id addHeatMap
 id addLayer
@@ -95,6 +96,8 @@ id addXRoute
 id alphaGrid_txt
 id altButtons
 id associations
+id bloodhoundDashboardTitle
+id bloodhoundOrdersRecyclerView
 id btnHookNavigationEvents
 id bumpControl
 id button1
@@ -105,7 +108,9 @@ id coordinateEntry
 id customMenuDefault
 id customMenuFactory
 id customType
+id dashboardContainer
 id defaultButtons
+id deleteOrderBtn
 id details_base
 id downloadMapLayer
 id drawShapes
@@ -161,6 +166,9 @@ id notificationSpammer
 id notificationWebPage
 id notificationWithOptions
 id numericGrid_txt
+id orderContact
+id orderStatus
+id orderTitle
 id overlayViewBtn
 id pluginNotification
 id rView
@@ -203,6 +211,8 @@ id vertical
 id videoLauncher
 id webView
 layout blank_linearlayout
+layout bloodhound_dashboard
+layout bloodhound_order_row
 layout fragment_foo
 layout hello_world_layout
 layout marker_callsign_row
