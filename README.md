@@ -1,12 +1,22 @@
-COMPILATION
+
+# Houndmaster Plugin
+
+This plugin controls Bloodhound orders within ATAK.
+
+## User Flow
+1. User clicks **Add new Bloodhound order**.
+2. The plugin displays **Map Items** for selection.
+3. The plugin then shows **Contacts** to associate with the order.
+
+---
+
+## COMPILATION
 
 helloword is a complete skeleton project that can be used as a starting point 
 for developing ATAK private plugins.  
 
-
 Private Plugins offer the most capability for utilizing the ATAK subsystem, but 
 this interface will likely change from version to version.
-
 
 build.xml and Makefile both reflect the same project name (in this case helloworld).
 
@@ -24,12 +34,3 @@ different android.content.Context in play.
 Note:
    The plugin context will cause a runtime error to occur if used to construct an
    AlertDialog.
-
-
-
-
-
-
-
-
-
