@@ -66,8 +66,8 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
                 // Show contacts drop-down
                 ContactsRecyclerViewDropDown contactsDropDown = new ContactsRecyclerViewDropDown(_mapView, _plugin);
                 contactsDropDown.show();
-                // Optionally, dismiss this drop-down if needed
-                dismiss();
+                // Optionally, dispose this drop-down if needed
+                dispose();
             }
         });
     }
