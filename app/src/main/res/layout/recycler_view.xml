@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="4dp"
-            android:text="List of TAK Users"
+            android:text="Map Items"
             android:textSize="18sp"
             android:textColor="#FFF"/>
         <ImageButton
