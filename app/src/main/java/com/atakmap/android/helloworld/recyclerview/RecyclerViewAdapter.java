@@ -1,4 +1,3 @@
-
 package com.atakmap.android.helloworld.recyclerview;
 
 import android.content.Context;
@@ -33,10 +32,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     private final LayoutInflater _inflater;
     private final List<MapItem> _items = new ArrayList<>();
     private boolean _listMode = true;
+    private final boolean contactsOnly;
+
+    private OnItemSelectedListener onItemSelectedListener;
 
     public RecyclerViewAdapter(MapView mapView, Context plugin) {
+        this(mapView, plugin, false);
+    }
+    public RecyclerViewAdapter(MapView mapView, Context plugin, boolean contactsOnly) {
         _mapView = mapView;
         _inflater = LayoutInflater.from(plugin);
+        this.contactsOnly = contactsOnly;
 
         addItems(mapView.getRootGroup());
     }
@@ -51,12 +57,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
     private void addItems(MapGroup group) {
         for (MapItem item : group.getItems()) {
-            // Only add dropped points with 2525D symbology (type starts with "a-") and NOT contacts
             String type = item.getType();
             boolean is2525D = type != null && type.startsWith("a-");
             boolean isContact = item.hasMetaValue("atakRoleType");
-            if (is2525D && !isContact) {
-                _items.add(item);
+            if (contactsOnly) {
+                if (isContact) _items.add(item);
+            } else {
+                if (is2525D && !isContact) _items.add(item);
             }
         }
         for (MapGroup grp : group.getChildGroups()) {
@@ -119,6 +126,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                 return;
             MapItem item = _items.get(pos);
             MapTouchController.goTo(item, true);
+            if (onItemSelectedListener != null) {
+                onItemSelectedListener.onItemSelected(item);
+            }
         }
+    }
+
+    public void setOnItemSelectedListener(OnItemSelectedListener listener) {
+        this.onItemSelectedListener = listener;
+    }
+    public interface OnItemSelectedListener {
+        void onItemSelected(MapItem item);
     }
 }

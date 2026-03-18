@@ -1,4 +1,3 @@
-
 package com.atakmap.android.helloworld.recyclerview;
 
 import android.content.Context;
@@ -38,7 +37,6 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
         super(mapView);
         _mapView = mapView;
         _plugin = plugin;
-
         _view = LayoutInflater.from(_plugin).inflate(R.layout.recycler_view,
                 mapView, false);
         _rView = _view.findViewById(R.id.rView);
@@ -46,7 +44,6 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
         _rView.setAdapter(_adapter);
         _rView.setLayoutManager(new LinearLayoutManager(_plugin,
                 LinearLayoutManager.VERTICAL, false));
-
         _vBtn = _view.findViewById(R.id.vertical);
         _vBtn.setSelected(true);
         _vBtn.setOnClickListener(this);
@@ -54,16 +51,25 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
         _hBtn.setOnClickListener(this);
         _gBtn = _view.findViewById(R.id.grid);
         _gBtn.setOnClickListener(this);
-
         // Add map listeners
         _mapView.getMapEventDispatcher().addMapEventListener(
                 MapEvent.ITEM_ADDED, this);
         _mapView.getMapEventDispatcher().addMapEventListener(
                 MapEvent.ITEM_REMOVED, this);
-
         // Update the time ago for all the users each second
         _timeUpdater = new TimeViewUpdater(_mapView, 1000);
         _timeUpdater.register(this);
+        // Set up item selection to show contacts
+        _adapter.setOnItemSelectedListener(new RecyclerViewAdapter.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MapItem item) {
+                // Show contacts drop-down
+                ContactsRecyclerViewDropDown contactsDropDown = new ContactsRecyclerViewDropDown(_mapView, _plugin);
+                contactsDropDown.show();
+                // Optionally, dismiss this drop-down if needed
+                dismiss();
+            }
+        });
     }
 
     @Override
