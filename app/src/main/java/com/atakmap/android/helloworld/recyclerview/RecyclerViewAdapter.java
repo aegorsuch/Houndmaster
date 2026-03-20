@@ -59,11 +59,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         for (MapItem item : group.getItems()) {
             String type = item.getType();
             boolean is2525D = type != null && type.startsWith("a-");
+            boolean isBMP = "b-m-p-s-p-i".equals(type);
             boolean isContact = item.hasMetaValue("atakRoleType");
             if (contactsOnly) {
                 if (isContact) _items.add(item);
             } else {
-                if (is2525D && !isContact) _items.add(item);
+                if ((is2525D || isBMP) && !isContact) _items.add(item);
             }
         }
         for (MapGroup grp : group.getChildGroups()) {
