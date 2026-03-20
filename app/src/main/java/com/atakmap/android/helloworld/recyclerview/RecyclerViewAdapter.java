@@ -19,6 +19,7 @@ import com.atakmap.android.util.ATAKUtilities;
 import com.atakmap.coremap.maps.time.CoordinatedTime;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -70,6 +71,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         for (MapGroup grp : group.getChildGroups()) {
             addItems(grp);
         }
+        // Sort alphabetically by title after collecting all items
+        Collections.sort(_items, new java.util.Comparator<MapItem>() {
+            @Override
+            public int compare(MapItem a, MapItem b) {
+                String t1 = a.getTitle();
+                String t2 = b.getTitle();
+                if (t1 == null) t1 = "";
+                if (t2 == null) t2 = "";
+                return t1.compareToIgnoreCase(t2);
+            }
+        });
     }
 
     public void setListMode(boolean listMode) {
