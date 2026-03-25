@@ -162,16 +162,18 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
 
     // Add this method to handle sending the Map Item to the Contact
     private void sendMapItemToContact(MapItem mapItem, MapItem contact) {
+        // Set remarks as a meta value before CoT creation
+        mapItem.setMetaString("remarks", "#houndmaster");
         // Serialize the MapItem to a CoT event
         com.atakmap.coremap.cot.event.CotEvent cotEvent = com.atakmap.android.importexport.CotEventFactory.createCotEvent(mapItem);
         if (cotEvent == null) {
             android.widget.Toast.makeText(_plugin, "Failed to create CoT event", android.widget.Toast.LENGTH_SHORT).show();
             return;
         }
+        // Do not add a custom <remarks> element after creation
         // Broadcast the CoT event to all
         com.atakmap.android.cot.CotMapComponent.getExternalDispatcher().dispatchToBroadcast(cotEvent);
         android.widget.Toast.makeText(_plugin, "Sent " + mapItem.getTitle(), android.widget.Toast.LENGTH_SHORT).show();
-        // Add to Bloodhound order dashboard
         String contactName = contact.getMetaString("callsign", contact.getTitle());
         BloodhoundOrder order = new BloodhoundOrder(mapItem.getTitle(), contactName, BloodhoundOrder.Status.Sent);
         BloodhoundOrderManager.getInstance().addOrder(order);
