@@ -32,15 +32,15 @@ buildscript {
         return (null == prop) ? defValue : prop
     }
 
-    def urlKey = 'takrepo.url'
+    def urlKey = 'takrepo_url'
 
     ext.isDevKitEnabled = { ->
         return getProperty(urlKey, null) != null
     }
 
     ext.takrepoUrl = getProperty(urlKey, 'https://localhost/')
-    ext.takrepoUser = getProperty('takrepo.user', 'invalid')
-    ext.takrepoPassword = getProperty('takrepo.password', 'invalid')
+    ext.takrepoUser = getProperty('takrepo_user', 'invalid')
+    ext.takrepoPassword = getProperty('takrepo_password', 'invalid')
     ext.takdevPlugin = getProperty('takdev.plugin', "${rootDir}/../../atak-gradle-takdev.jar")
 
     repositories {
@@ -283,5 +283,3 @@ configurations.implementation {
        exclude group: 'androidx.lifecycle', module: 'lifecycle'
        exclude group: 'androidx.lifecycle', module: 'lifecycle-process'
 }
-
-

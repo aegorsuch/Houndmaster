@@ -854,10 +854,10 @@
         </LinearLayout>
     </ScrollView>
 
-    <FrameLayout
-        android:id="@+id/dashboardContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#222" />
+<!--    <FrameLayout-->
+<!--        android:id="@+id/dashboardContainer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#222" />-->
 
 </LinearLayout>

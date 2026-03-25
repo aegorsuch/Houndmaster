@@ -65,9 +65,6 @@
 -keep class * extends com.atak.plugins.impl.AbstractPluginTool {
 }
 
-# overcome an existing bug in the gradle subsystem (3.5.x)
--keep class module-info
-
 -keep,allowobfuscation @interface gov.tak.api.annotation.DontObfuscate
 
 # Do not strip any method/class that is annotated with @DontObfuscate
@@ -95,7 +92,7 @@
 ## plugin.  This will help get bug reports to your development group.
 ######################################################################
 
--repackageclasses atakplugin.helloworld
+-repackageclasses atakplugin.houndmaster
 
 
 ######################################################################
@@ -104,4 +101,3 @@
 ######################################################################
 
 -dontwarn androidx.viewpager.widget.ViewPager$SavedState
-
